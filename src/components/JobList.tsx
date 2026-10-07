@@ -38,12 +38,12 @@ export const JobList: React.FC<JobListProps> = ({
 }) => {
   return (
     <div className="space-y-6">
-      {/* Khung Hero Banner: Thay bằng Banner chính thức "Nối cơ hội - Đổi cuộc đời" */}
-      <div className="relative rounded-[22px] sm:rounded-[26px] overflow-hidden shadow-lg border border-slate-200/90 bg-white">
+      {/* Khung Hero Banner: Thay bằng Banner chính thức "Nối cơ hội - Đổi cuộc đời" (Chiều cao gọn gàng, cân đối) */}
+      <div className="relative rounded-[18px] sm:rounded-[22px] overflow-hidden shadow-sm border border-slate-200/90 bg-white">
         <img 
           src="/hero_banner.jpg" 
           alt="Banner Nối cơ hội - Đổi cuộc đời" 
-          className="w-full h-auto object-cover max-h-[460px] sm:max-h-[520px] block"
+          className="w-full h-auto max-h-[170px] sm:max-h-[210px] md:max-h-[240px] lg:max-h-[260px] object-cover object-center block"
           loading="eager"
         />
       </div>

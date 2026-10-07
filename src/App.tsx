@@ -12,7 +12,6 @@ import { ApplyModal } from './components/ApplyModal';
 import { SavedJobsModal } from './components/SavedJobsModal';
 import { JobAlertsModal } from './components/JobAlertsModal';
 import { LoginProfileModal } from './components/LoginProfileModal';
-import { MobileBottomNav } from './components/MobileBottomNav';
 import { EmployerPostJob } from './components/EmployerPostJob';
 
 import { 
@@ -343,8 +342,8 @@ export function App() {
         </div>
       )}
 
-      {/* Main Container - Extra bottom padding on mobile for MobileBottomNav */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 pb-24 md:pb-8">
+      {/* Main Container */}
+      <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8">
         {/* TAB 1: VIỆC LÀM (Job List with Hero Welcome Banner & Filtered Jobs) */}
         {activeTab === 'jobs' && (
           <JobList
@@ -474,7 +473,7 @@ export function App() {
 
       {/* Footer styled with palette (FFD273, FEE686, FEC5E6, DEB5D7, BFAEE3) */}
       <footer 
-        className="text-slate-300 text-xs border-t mt-12 pt-10 pb-28 md:pb-10"
+        className="text-slate-300 text-xs border-t mt-12 pt-10 pb-10"
         style={{
           background: 'linear-gradient(135deg, #1E293B 0%, #28374D 50%, #172335 100%)',
           borderColor: 'rgba(222, 181, 215, 0.4)'
@@ -486,7 +485,7 @@ export function App() {
               <div className="flex items-center gap-2.5">
                 <img 
                   src="/app_logo.png" 
-                  alt="Logo Nối cơ hội - Đổi cuộc đời"
+                  alt="Logo Nối cơ hội - Đổi cuộc đời" 
                   className="w-10 h-10 object-contain drop-shadow-md"
                 />
                 <span className="text-white font-extrabold text-base tracking-tight">
@@ -553,16 +552,6 @@ export function App() {
           </div>
         </div>
       </footer>
-
-      {/* Mobile Bottom Navigation Bar (Fixed for phones) */}
-      <MobileBottomNav
-        activeTab={activeTab}
-        onTabChange={handleNavigationChange}
-        userProfile={userProfile}
-        onOpenProfile={() => setIsLoginModalOpen(true)}
-        savedJobsCount={savedJobIds.length}
-        onOpenSavedModal={handleOpenSavedJobs}
-      />
     </div>
   );
 }
