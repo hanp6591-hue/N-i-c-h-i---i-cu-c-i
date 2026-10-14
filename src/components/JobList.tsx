@@ -29,7 +29,6 @@ export const JobList: React.FC<JobListProps> = ({
   onToggleSave,
   onSelectJob,
   onQuickApply,
-  onNavigateToEmployerPost,
   experienceTab,
   onSelectExperienceTab,
   noExpJobsCount,
@@ -38,69 +37,53 @@ export const JobList: React.FC<JobListProps> = ({
 }) => {
   return (
     <div className="space-y-6">
-      {/* Khung Hero Banner: Thay bằng Banner chính thức "Nối cơ hội - Đổi cuộc đời" (Chiều cao gọn gàng, cân đối) */}
-      <div className="relative rounded-[18px] sm:rounded-[22px] overflow-hidden shadow-sm border border-slate-200/90 bg-white">
+      {/* Khung Hero Banner: Hiển thị đầy đủ 100% nội dung, không cắt xén, không tràn khung, responsive hoàn hảo trên cả laptop và điện thoại */}
+      <div className="w-full relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-sm border border-slate-200/90 bg-white">
         <img 
           src="/hero_banner.jpg" 
           alt="Banner Nối cơ hội - Đổi cuộc đời" 
-          className="w-full h-auto max-h-[170px] sm:max-h-[210px] md:max-h-[240px] lg:max-h-[260px] object-cover object-center block"
+          className="w-full h-auto block object-contain select-none"
           loading="eager"
         />
       </div>
 
-      {/* Quick Action Badges */}
-      <div className="flex flex-wrap items-center justify-between gap-2.5 pt-0.5">
-        <div className="flex flex-wrap items-center gap-2">
-          <button
-            type="button"
-            id="btn-hero-no-exp-filter"
-            onClick={() => onSelectExperienceTab(experienceTab === 'no-experience' ? 'all' : 'no-experience')}
-            className={`inline-flex items-center justify-center gap-2 px-3.5 py-2 min-h-[40px] rounded-xl text-xs sm:text-sm font-bold shadow-xs transition-all active:scale-98 cursor-pointer border ${
-              experienceTab === 'no-experience' 
-                ? 'border-[#e6bd67] ring-2 ring-[#FFD273] shadow-md' 
-                : 'border-amber-200/80 hover:bg-amber-50/60 text-slate-800'
-            }`}
-            style={{
-              backgroundColor: experienceTab === 'no-experience' ? '#FFD273' : '#FFFDF5',
-              color: '#3d2b02'
-            }}
-          >
-            <Sparkles className="w-4 h-4 text-amber-950" />
-            <span>Chưa có kinh nghiệm ({noExpJobsCount} việc)</span>
-          </button>
+      {/* Quick Action Badges (Đã xóa nút đăng tuyển ở trang chủ theo yêu cầu, giữ lại ở menu ba gạch) */}
+      <div className="flex flex-wrap items-center gap-2 pt-0.5">
+        <button
+          type="button"
+          id="btn-hero-no-exp-filter"
+          onClick={() => onSelectExperienceTab(experienceTab === 'no-experience' ? 'all' : 'no-experience')}
+          className={`inline-flex items-center justify-center gap-2 px-3.5 py-2 min-h-[40px] rounded-xl text-xs sm:text-sm font-bold shadow-xs transition-all active:scale-98 cursor-pointer border ${
+            experienceTab === 'no-experience' 
+              ? 'border-[#e6bd67] ring-2 ring-[#FFD273] shadow-md' 
+              : 'border-amber-200/80 hover:bg-amber-50/60 text-slate-800'
+          }`}
+          style={{
+            backgroundColor: experienceTab === 'no-experience' ? '#FFD273' : '#FFFDF5',
+            color: '#3d2b02'
+          }}
+        >
+          <Sparkles className="w-4 h-4 text-amber-950" />
+          <span>Chưa có kinh nghiệm ({noExpJobsCount} việc)</span>
+        </button>
 
-          <button
-            type="button"
-            id="btn-hero-has-exp-filter"
-            onClick={() => onSelectExperienceTab(experienceTab === 'has-experience' ? 'all' : 'has-experience')}
-            className={`inline-flex items-center justify-center gap-2 px-3.5 py-2 min-h-[40px] rounded-xl text-slate-900 text-xs sm:text-sm font-bold shadow-xs transition-all active:scale-98 cursor-pointer border border-[#DEB5D7] ${
-              experienceTab === 'has-experience' 
-                ? 'border-[#f2a8d4] ring-2 ring-[#FEC5E6] shadow-md' 
-                : 'border-pink-200/80 hover:bg-pink-50/60 text-slate-800'
-            }`}
-            style={{
-              backgroundColor: experienceTab === 'has-experience' ? '#FEC5E6' : '#FFFDFD',
-              color: '#1E293B'
-            }}
-          >
-            <GraduationCap className="w-4 h-4 text-pink-700" />
-            <span className="text-slate-900">Đã có kinh nghiệm ({hasExpJobsCount})</span>
-          </button>
-        </div>
-
-        {onNavigateToEmployerPost && (
-          <button
-            type="button"
-            onClick={onNavigateToEmployerPost}
-            className="inline-flex items-center justify-center gap-2 px-3.5 py-2 min-h-[40px] rounded-xl text-slate-900 text-xs sm:text-sm font-bold transition-all cursor-pointer shadow-xs hover:opacity-95 hover:scale-[1.01] border border-[#DEB5D7]"
-            style={{
-              background: 'linear-gradient(135deg, rgba(255, 210, 115, 0.5) 0%, rgba(254, 197, 230, 0.5) 50%, rgba(191, 174, 227, 0.5) 100%)'
-            }}
-          >
-            <Building2 className="w-4 h-4 text-amber-900" />
-            <span>Đăng tuyển trực tiếp</span>
-          </button>
-        )}
+        <button
+          type="button"
+          id="btn-hero-has-exp-filter"
+          onClick={() => onSelectExperienceTab(experienceTab === 'has-experience' ? 'all' : 'has-experience')}
+          className={`inline-flex items-center justify-center gap-2 px-3.5 py-2 min-h-[40px] rounded-xl text-slate-900 text-xs sm:text-sm font-bold shadow-xs transition-all active:scale-98 cursor-pointer border border-[#DEB5D7] ${
+            experienceTab === 'has-experience' 
+              ? 'border-[#f2a8d4] ring-2 ring-[#FEC5E6] shadow-md' 
+              : 'border-pink-200/80 hover:bg-pink-50/60 text-slate-800'
+          }`}
+          style={{
+            backgroundColor: experienceTab === 'has-experience' ? '#FEC5E6' : '#FFFDFD',
+            color: '#1E293B'
+          }}
+        >
+          <GraduationCap className="w-4 h-4 text-pink-700" />
+          <span className="text-slate-900">Đã có kinh nghiệm ({hasExpJobsCount})</span>
+        </button>
       </div>
 
       {/* Results Header */}

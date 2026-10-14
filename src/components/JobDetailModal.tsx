@@ -276,10 +276,11 @@ export const JobDetailModal: React.FC<JobDetailModalProps> = ({
                   : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-100'
               }`}
               style={isSaved ? { backgroundColor: '#FEC5E6', color: '#542045' } : undefined}
+              title={isSaved ? "Đã lưu - Nhấn để bỏ lưu khỏi Việc làm đã lưu" : "Nhấn để lưu vào Việc làm đã lưu"}
             >
               {isSaved ? (
                 <>
-                  <BookmarkCheck className="w-4 h-4 fill-current text-[#DEB5D7]" /> Đã lưu việc làm
+                  <BookmarkCheck className="w-4 h-4 fill-current text-purple-700" /> Đã lưu việc làm
                 </>
               ) : (
                 <>

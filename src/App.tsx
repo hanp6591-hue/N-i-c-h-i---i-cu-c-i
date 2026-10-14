@@ -34,7 +34,10 @@ import {
   CheckCircle2,
   FileText,
   UserCheck,
-  ChevronRight
+  ChevronRight,
+  Bookmark,
+  BookmarkCheck,
+  X
 } from 'lucide-react';
 
 export function App() {
@@ -81,6 +84,28 @@ export function App() {
   // Dedicated independent states for Saved Jobs and Job Alerts
   const [isSavedJobsOpen, setIsSavedJobsOpen] = useState(false);
   const [isJobAlertsOpen, setIsJobAlertsOpen] = useState(false);
+
+  // Toast Notification State (Đưa ra thông báo đúng khi lưu hoặc bỏ lưu công việc)
+  const [toastAlert, setToastAlert] = useState<{
+    id: string;
+    message: string;
+    type: 'save' | 'unsave' | 'info';
+    actionLabel?: string;
+    onAction?: () => void;
+  } | null>(null);
+
+  const triggerToast = (
+    message: string, 
+    type: 'save' | 'unsave' | 'info' = 'save', 
+    actionLabel?: string, 
+    onAction?: () => void
+  ) => {
+    const id = Date.now().toString();
+    setToastAlert({ id, message, type, actionLabel, onAction });
+    setTimeout(() => {
+      setToastAlert(current => (current?.id === id ? null : current));
+    }, 4500);
+  };
 
   // Global Search & Filter State for Header Search Bar
   const [searchTerm, setSearchTerm] = useState('');
@@ -212,9 +237,27 @@ export function App() {
   };
 
   const handleToggleSaveJob = (jobId: string) => {
-    setSavedJobIds(prev => 
-      prev.includes(jobId) ? prev.filter(id => id !== jobId) : [...prev, jobId]
-    );
+    const targetJob = jobs.find(j => j.id === jobId);
+    const jobTitle = targetJob ? `"${targetJob.title}"` : 'công việc';
+
+    setSavedJobIds(prev => {
+      const isAlreadySaved = prev.includes(jobId);
+      if (isAlreadySaved) {
+        triggerToast(
+          `Đã bỏ lưu ${jobTitle} khỏi danh sách Việc làm đã lưu.`,
+          'unsave'
+        );
+        return prev.filter(id => id !== jobId);
+      } else {
+        triggerToast(
+          `Đã lưu ${jobTitle} vào danh sách Việc làm đã lưu thành công!`,
+          'save',
+          'Xem danh sách',
+          () => setIsSavedJobsOpen(true)
+        );
+        return [...prev, jobId];
+      }
+    });
   };
 
   const handleSelectJobForDetail = (job: Job) => {
@@ -352,7 +395,6 @@ export function App() {
             onToggleSave={handleToggleSaveJob}
             onSelectJob={handleSelectJobForDetail}
             onQuickApply={handleQuickApply}
-            onNavigateToEmployerPost={() => setActiveTab('employer-post')}
             experienceTab={experienceTab}
             onSelectExperienceTab={(tab) => setExperienceTab(tab)}
             noExpJobsCount={noExpJobsCount}
@@ -552,6 +594,75 @@ export function App() {
           </div>
         </div>
       </footer>
+
+      {/* Thông báo nổi (Toast Notification) khi lưu / bỏ lưu công việc */}
+      {toastAlert && (
+        <aside
+          role="status"
+          aria-live="polite"
+          className="fixed bottom-5 right-4 sm:right-6 z-50 max-w-sm sm:max-w-md w-[calc(100%-2rem)] bg-white rounded-2xl shadow-2xl border p-4 flex items-center justify-between gap-3 animate-in fade-in slide-in-from-bottom-3 duration-200"
+          style={{
+            borderColor: toastAlert.type === 'save' ? '#DEB5D7' : '#e2e8f0',
+            boxShadow: toastAlert.type === 'save' 
+              ? '0 10px 25px -5px rgba(222, 181, 215, 0.5)' 
+              : '0 10px 25px -5px rgba(0, 0, 0, 0.12)'
+          }}
+        >
+          <div className="flex items-center gap-3 min-w-0">
+            <div 
+              className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 shadow-2xs"
+              style={{
+                backgroundColor: toastAlert.type === 'save' ? '#FFD273' : '#F1F5F9',
+                color: toastAlert.type === 'save' ? '#3d2b02' : '#475569'
+              }}
+            >
+              {toastAlert.type === 'save' ? (
+                <BookmarkCheck className="w-5 h-5 text-amber-950" />
+              ) : (
+                <Bookmark className="w-5 h-5 text-slate-600" />
+              )}
+            </div>
+            <div className="min-w-0">
+              <p className="text-xs font-bold text-slate-900 leading-snug line-clamp-2">
+                {toastAlert.message}
+              </p>
+              {toastAlert.type === 'save' && (
+                <p className="text-[11px] text-slate-500 mt-0.5">
+                  Đã lưu vào danh sách. Bạn có thể xem lại bất cứ lúc nào.
+                </p>
+              )}
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 shrink-0">
+            {toastAlert.actionLabel && toastAlert.onAction && (
+              <button
+                type="button"
+                onClick={() => {
+                  toastAlert.onAction?.();
+                  setToastAlert(null);
+                }}
+                className="px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer shadow-2xs whitespace-nowrap border"
+                style={{
+                  backgroundColor: '#FFD273',
+                  borderColor: '#e6bd67',
+                  color: '#3d2b02'
+                }}
+              >
+                {toastAlert.actionLabel}
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={() => setToastAlert(null)}
+              className="p-1 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
+              aria-label="Đóng thông báo"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+        </aside>
+      )}
     </div>
   );
 }

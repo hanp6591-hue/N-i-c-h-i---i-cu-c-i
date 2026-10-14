@@ -116,9 +116,13 @@ export type NavigationTab =
   | 'saved-jobs'
   | 'job-alerts';
 
+export type NotificationCategory = 'all' | 'unread' | 'job' | 'security' | 'application';
+
 export interface JobAlert {
   id: string;
+  type?: 'job' | 'security' | 'application' | 'system';
   title?: string;
+  message?: string;
   companyName?: string;
   industryCode: string;
   salaryText?: string;
@@ -126,6 +130,7 @@ export interface JobAlert {
   timestamp?: string;
   isNoExp?: boolean;
   isRead?: boolean;
+  jobId?: string;
   keyword?: string;
   salaryRange?: string;
   experienceRequired?: string;

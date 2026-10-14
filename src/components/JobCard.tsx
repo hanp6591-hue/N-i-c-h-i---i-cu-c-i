@@ -116,13 +116,13 @@ export const JobCard: React.FC<JobCardProps> = ({
               onToggleSave(job.id);
             }}
             className="p-2 sm:p-1.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl text-slate-400 hover:text-slate-800 hover:bg-slate-100 transition-colors cursor-pointer"
-            title={isSaved ? "Bỏ lưu việc làm" : "Lưu việc làm yêu thích"}
-            aria-label={isSaved ? "Bỏ lưu việc làm" : "Lưu việc làm yêu thích"}
+            title={isSaved ? "Đã lưu - Nhấn để bỏ lưu khỏi Việc làm đã lưu" : "Nhấn để lưu vào Việc làm đã lưu"}
+            aria-label={isSaved ? "Đã lưu - Nhấn để bỏ lưu khỏi Việc làm đã lưu" : "Nhấn để lưu vào Việc làm đã lưu"}
           >
             {isSaved ? (
-              <BookmarkCheck className="w-5 h-5 fill-current" style={{ color: '#DEB5D7' }} />
+              <BookmarkCheck className="w-5 h-5 fill-current text-purple-700" />
             ) : (
-              <Bookmark className="w-5 h-5 hover:text-[#DEB5D7]" />
+              <Bookmark className="w-5 h-5 hover:text-purple-700" />
             )}
           </button>
         </div>

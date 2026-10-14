@@ -105,9 +105,23 @@ export const SavedJobsModal: React.FC<SavedJobsModalProps> = ({
             </div>
           ) : (
             <div className="space-y-3">
-              <div className="flex items-center justify-between text-xs text-slate-500 pb-1">
-                <span>Bạn đang lưu <strong>{savedJobs.length}</strong> cơ hội nghề nghiệp</span>
-                <span className="text-[11px] text-slate-400">Ứng tuyển trực tiếp 0đ chi phí</span>
+              <div 
+                className="p-3.5 rounded-2xl border flex items-center justify-between gap-3 text-xs"
+                style={{
+                  backgroundColor: 'rgba(255, 210, 115, 0.18)',
+                  borderColor: 'rgba(255, 210, 115, 0.7)',
+                  color: '#3d2b02'
+                }}
+              >
+                <div className="flex items-center gap-2">
+                  <Bookmark className="w-4 h-4 text-amber-800 shrink-0" />
+                  <span>
+                    Hiện có <strong>{savedJobs.length}</strong> công việc trong danh sách đã lưu. Bạn có thể xem chi tiết hoặc ứng tuyển trực tiếp bất kỳ lúc nào.
+                  </span>
+                </div>
+                <span className="hidden sm:inline-block font-bold text-[11px] text-amber-900 bg-[#FFD273] px-2 py-0.5 rounded-md">
+                  100% 0đ phí
+                </span>
               </div>
 
               {savedJobs.map((job) => (

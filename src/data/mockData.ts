@@ -1026,47 +1026,72 @@ export const RECRUITMENT_REVIEWS: RecruitmentReview[] = [
 export const INITIAL_JOB_ALERTS: JobAlert[] = [
   {
     id: 'alert-01',
-    title: 'Việc làm mới: Thực tập sinh Lập trình Web Frontend',
+    type: 'job',
+    title: 'Việc làm mới phù hợp: Thực tập sinh Lập trình Web Frontend',
+    message: 'FPT Software đang tuyển dụng thực tập sinh có hỗ trợ đào tạo từ đầu, không yêu cầu kinh nghiệm, trợ cấp 6 - 9 triệu/tháng.',
     companyName: 'FPT Software (CNKT)',
     industryCode: 'CNKT',
     salaryText: '6 - 9 triệu / tháng',
     city: 'Hà Nội & TP. HCM',
     timestamp: '15 phút trước',
     isNoExp: true,
-    isRead: false
+    isRead: false,
+    jobId: 'job-cnkt-01'
   },
   {
     id: 'alert-02',
-    title: 'Việc làm mới: Nhân viên Điều phối Đơn hàng & Kho bãi',
+    type: 'job',
+    title: 'Việc làm mới phù hợp: Nhân viên Điều phối Đơn hàng & Kho bãi',
+    message: 'Viettel Post tuyển dụng trực tiếp tại kho, không qua trung gian, lương 8 - 12 triệu/tháng, chế độ đầy đủ.',
     companyName: 'Viettel Post (DVVT)',
     industryCode: 'DVVT',
     salaryText: '8 - 12 triệu / tháng',
     city: 'Hà Nội & TP. HCM',
     timestamp: '1 giờ trước',
     isNoExp: true,
-    isRead: false
+    isRead: false,
+    jobId: 'job-dvvt-01'
   },
   {
     id: 'alert-03',
+    type: 'security',
     title: 'Cảnh báo an toàn việc làm: Đề phòng chiêu trò nộp tiền cọc đồng phục',
+    message: 'Ban Quản Trị lưu ý: Doanh nghiệp chân chính TUYỆT ĐỐI KHÔNG thu bất kỳ chi phí nào (tiền cọc, giữ chỗ, đồng phục, làm thẻ) khi phỏng vấn.',
     companyName: 'Ban Quản Trị Hệ Thống',
     industryCode: 'ALL',
-    salaryText: 'Cảnh báo lừa đảo',
+    salaryText: 'Cảnh báo an toàn 0đ phí',
     city: 'Toàn quốc',
-    timestamp: 'Hôm nay',
+    timestamp: '2 giờ trước',
     isNoExp: true,
     isRead: false
   },
   {
     id: 'alert-04',
-    title: 'Việc làm mới: Nhân viên Thu Ngân & Bán Hàng (Gần nhà)',
+    type: 'application',
+    title: 'Cập nhật trạng thái: WinMart đã xem hồ sơ ứng tuyển của bạn',
+    message: 'Hồ sơ ứng tuyển vị trí Nhân viên Thu Ngân & Bán Hàng của bạn đã được bộ phận nhân sự WinMart tiếp nhận và đang xét duyệt.',
     companyName: 'WinMart (KTTM)',
     industryCode: 'KTTM',
     salaryText: '7 - 10 triệu / tháng',
     city: 'Toàn quốc',
-    timestamp: '2 giờ trước',
+    timestamp: 'Hôm qua',
     isNoExp: true,
-    isRead: true
+    isRead: true,
+    jobId: 'job-kttm-01'
+  },
+  {
+    id: 'alert-05',
+    type: 'job',
+    title: 'Việc làm mới phù hợp: Thực tập sinh Content Creator & Fanpage',
+    message: 'VietBuzz Media đang mở tuyển bạn trẻ đam mê mạng xã hội, bắt trend TikTok/Canva, làm việc linh hoạt, trợ cấp 4 - 7 triệu/tháng.',
+    companyName: 'VietBuzz Media (MKT)',
+    industryCode: 'MKT',
+    salaryText: '4 - 7 triệu / tháng',
+    city: 'TP. Hồ Chí Minh',
+    timestamp: '2 ngày trước',
+    isNoExp: true,
+    isRead: true,
+    jobId: 'job-mkt-01'
   }
 ];
 
